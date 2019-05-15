@@ -1,0 +1,210 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <link rel="shortcut icon" type="image/ico" href="favicon.ico"/>
+        <link href="css/bootstrap.min.css" rel="stylesheet" type="text/css">
+        <link href="css/font-awesome.min.css" rel="stylesheet">
+		<link href="css/style.css" rel="stylesheet" type="text/css">
+		<title>Deep Learning</title> 
+    </head>
+   <body>
+		<header>
+			<nav class="navbar navbar-expand-md navbar-dark fixed-top bg-blue">
+				<a class="navbar-brand home" href="#">Deep Learning</a>
+				<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+					<span class="navbar-toggler-icon"></span>
+				</button>
+				<div class="collapse navbar-collapse" id="navbarCollapse">
+					<ul class="navbar-nav mr-auto">
+						<li class="nav-item active">
+							<a class="nav-link home" href="#">Home</a>
+						</li>
+	
+						<div id="tester"></div>
+					</ul>
+				</div>
+			</nav>
+		</header>
+
+        <div id="mainframe">
+
+            <div id="content">
+                <div id="menu">
+                	<div id="menu_home">
+                		<button type="button" id="addnn_button" class="btn btn-outline-primary button_menu"><div class="nn_create"><i class="fa fa-plus-circle fa-1x icon"></i></div>Create</button>
+                		<div id="neuralnetworks_menu_home">
+                		</div>
+                	</div>
+					<div id="menu_chosenn">
+                		<button type="button" nntype="mlp" class="btn btn-outline-primary button_menu chosenn_button"><div class="nn_create"><i class="fa fa-plus-circle fa-1x icon"></i></div>Create new <b>MLP</b></button>
+						<!--button type="button" nntype="cnn" class="btn btn-outline-primary button_menu chosenn_button"><div class="nn_create"><i class="fa fa-plus-circle fa-1x icon"></i></div>Create new <b>CNN</b></button>
+						<button type="button" nntype="rnn" class="btn btn-outline-primary button_menu chosenn_button"><div class="nn_create"><i class="fa fa-plus-circle fa-1x icon"></i></div>Create new <b>RNN</b></button-->
+                	</div>
+                	<div id="menu_create_mlp">
+                		<button type="button" id="back_button" class="btn btn-outline-primary button_menu home"><div class="nn_back"><i class="fa fa-backward fa-1x icon"></i></div>Back</button>
+                		<hr class="hr_menu" />
+                		<span class="badge badge-primary">Framework</span>
+                		<select id="nnframework" class="btn btn-outline-primary button_menu">
+							<option value="kerasapi">Tensorflow</option>
+                			<!--option value="tensorflow">Tensorflow</option>
+  							<option value="neuroph">Neuroph</option-->
+                		</select>
+	                    <div class="layer">
+	                        <span class="badge badge-primary">Input layer</span>
+	                        <input type="text" id="nbInputNeurons" class="form-control input_text_menu" placeholder="Nb input neurons">
+	                    </div>
+	                    <div id="hiddenLayers" class="layer">
+	                        <span id="firstHiddenLayerBadge" class="badge badge-primary">Hidden layer</span>
+	                        <input type="text" id="nbHiddenNeurons" class="form-control hiddenLayer input_text_menu" placeholder="Nb hidden neurons">
+	                        <div id="moreLayers"></div>
+	                        <button type="button" id="removeLayer_button" class="btn btn-outline-primary button_menu">Remove layer</button>
+	                        <button type="button" id="addLayer_button" class="btn btn-outline-primary button_menu">Add layer</button>
+	                    </div>
+	                    <div class="layer">
+	                        <span class="badge badge-primary">Output layer</span>
+	                        <input type="text" id="nbOutputNeurons" class="form-control input_text_menu" placeholder="Nb output neurons">
+	                    </div>
+	                    <button type="button" nntype="mlp" class="btn btn-outline-primary button_menu create_button">Generate</button>
+	                    <div id="menu_create_validate">
+	                    	<hr class="hr_menu" />
+	                    	<input type="text" id="nnid" class="form-control input_text_menu" placeholder="Neural network ID">
+	                    	<button type="button" id="validate_creation_button" class="btn btn-outline-primary button_menu">Create</button>
+	                    </div>
+						<input type="hidden" id="nntype" value="mlp" />
+                    </div>
+					<div id="menu_create_cnn">
+                		<button type="button" id="back_button" class="btn btn-outline-primary button_menu home"><div class="nn_back"><i class="fa fa-backward fa-1x icon"></i></div>Back</button>
+                		<hr class="hr_menu" />
+                		<span class="badge badge-primary">Framework</span>
+                		<select id="nnframework" class="btn btn-outline-primary button_menu">
+                			<option value="tensorflow">Tensorflow</option>
+  							<option value="neuroph">Neuroph</option>
+                		</select>
+	                    <div class="layer">
+	                        <span class="badge badge-primary">Input layer</span>
+	                        <input type="text" id="nbInputNeurons_cnn" class="form-control input_text_menu" placeholder="Example: 50x50">
+	                    </div>
+	                    <div class="layer">
+	                        <span class="badge badge-primary">Output layer</span>
+	                        <input type="text" id="nbOutputNeurons_cnn" class="form-control input_text_menu" placeholder="Nb output neurons">
+	                    </div>
+	                    <button type="button" nntype="cnn" class="btn btn-outline-primary button_menu create_button">Generate</button>
+	                    <div id="menu_create_validate">
+	                    	<hr class="hr_menu" />
+	                    	<input type="text" id="nnid_cnn" class="form-control input_text_menu" placeholder="Neural network ID">
+	                    	<button type="button" id="validate_creation_button" class="btn btn-outline-primary button_menu">Create</button>
+	                    </div>
+						<input type="hidden" id="nntype" value="cnn" />
+                    </div>
+                    <div id="menu_nn">
+                    	<form id="form_create_dataset">
+		            		<div id="currentnn" nntype="" framework="" neurons="" class="btn btn-outline-primary neuralnetwork_menu_home_label"></div>
+		            		<div id="currentnn_framework" neurons="" class="btn btn-outline-primary neuralnetwork_menu_home_label"></div>
+		            		<button type="button" id="back_button" class="btn btn-outline-primary button_menu home"><div class="nn_back"><i class="fa fa-backward fa-1x icon"></i></div>Back</button>
+		            		<hr class="hr_menu" />
+		            		<input type="file" name="csv_file" id="upload_csv" />
+		            		<button type="button" id="upload_input" class="btn btn-outline-primary button_menu">Upload input (CSV)</button>
+		            		<hr class="hr_menu" />
+		            		<span id="menu_nn_outputs_badge" class="badge badge-primary">Output names</span>
+		            		<div id="menu_nn_output_neurons"></div>
+		            		<hr class="hr_menu" />
+		            		<input type="button" id="create_dataset" value="Create dataset" class="btn btn-outline-primary button_menu" />
+		            		<input type="hidden" name="form_create_dataset_login" id="form_create_dataset_login" />
+		            		<input type="hidden" name="form_create_dataset_nnid" id="form_create_dataset_nnid" />
+	            		</form>
+	            		<hr class="hr_menu" />
+	            		<button type="button" id="train_button" class="btn btn-outline-primary button_menu" nnid="">Start training</button>
+	            	</div>
+	            	<div id="menu_nn_trained">
+	            		<div id="currentnn_trained" neurons="" class="btn btn-outline-primary neuralnetwork_menu_home_label"></div>
+	            		<div id="currentnn_trained_framework" neurons="" class="btn btn-outline-primary neuralnetwork_menu_home_label"></div>
+	            		<button type="button" id="back_button" class="btn btn-outline-primary button_menu home"><div class="nn_back"><i class="fa fa-backward fa-1x icon"></i></div>Back</button>
+	            		<hr class="hr_menu" />
+	            		<span id="menu_nn_outputs_badge" class="badge badge-primary">Input values</span>
+	            		<div id="menu_nn_input_neurons_values"></div>
+	            		<span id="menu_nn_outputs_line_badge" class="badge badge-primary">Or directly enter input line</span>
+	            		<input type="text" id="input_neurons_line" nbinputs="" class="form-control input_text_menu_classic" placeholder="Input values">
+	            		<hr class="hr_menu" />
+	            		<button type="button" id="get_prediction_button" class="btn btn-outline-primary button_menu" nnid="">Get Prediction</button>
+	            		<hr class="hr_menu" />
+	            		<!--button type="button" id="gen_url_button" class="btn btn-outline-primary button_menu" nnid="">Generate URL</button-->
+	            	</div>
+                </div>
+                <div id="canvas_container">
+                	<canvas id="canvas" width="1100" height="500"></canvas>
+                </div>
+            </div>
+
+        </div>
+
+		<div class="modal fade" id="signupmodal" tabindex="-1" role="dialog" saria-hidden="true">
+			<div class="modal-dialog" role="document">
+				<div id="signupmodal_content" class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title">Create an account</h5>
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
+					<div id="modal_signup_content">
+						<form id="user_to_add" onsubmit="event.preventDefault();">
+							<div id="user_add_inputs" class="form-group">
+								<label for="form-email">E-Mail</label>
+								<input type="email" class="form-control" id="form-email-add" aria-describedby="emailHelp" placeholder="Enter your email">
+								<label for="form-email">Password</label>
+								<input type="password" class="form-control" id="form-pwd-add" aria-describedby="pwdHelp" placeholder="Enter your password">
+								<label for="form-email">Confirm password</label>
+								<input type="password" class="form-control" id="form-pwd2-add" aria-describedby="pwd2Help" placeholder="Confirm your password">
+							</div>
+							<button id="add_user_button" type="submit" class="btn btn-primary">Create account</button>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="modal fade" id="removennmodal" tabindex="-1" role="dialog" saria-hidden="true">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title">Remove neural network</h5>
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
+					<h4 id="removennlabel">Are you sure you want to delete <span id="removennlabel_id"></span>?</h4>
+					<div id="modal_removenn_buttons">
+						<button id="remove_nn_button_yes" data-dismiss="modal" class="btn btn-primary remove_nn_button">Yes</button>
+						<button id="remove_nn_button_no" data-dismiss="modal" class="btn btn-primary remove_nn_button">No</button>
+					</div>
+				</div>
+			</div>
+			<span id="removennlabel_id_hidden"></span>
+		</div>
+
+		<div id="loading">
+			<span id="loading-label">Training</span>
+			<div class="lds-ellipsis"><div></div><div></div><div></div><div></div></div>
+		</div>
+
+		<div id="neuron_desc"></div>
+
+		<input type="hidden" id="session_login" value="" />
+		<input type="hidden" id="session_id" value="" />
+
+		<footer>
+			<label>Generated URL</label>
+			<input type="text" id="generated_url_text" class="form-control" />
+			<button type="button" id="generated_url_close" class="close" aria-label="Close">
+				<span aria-hidden="true">×</span>
+			</button>
+			<button id="generated_url_copy_button" type="button" class="btn btn-outline-info my-2 my-sm-0">Copy</button>
+		</footer>
+
+        <script type="text/javascript" src="js/jquery-3.2.1.min.js"></script>
+        <script type="text/javascript" src="js/byonnd.min.js"></script>
+        <script type="text/javascript" src="js/bootstrap.min.js"></script>
+        <script type="text/javascript" src="js/main.js"></script>
+    </body>
+</html>
